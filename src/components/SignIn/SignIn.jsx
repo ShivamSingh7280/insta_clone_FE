@@ -14,7 +14,7 @@ import { API } from "../../config/Api";
 import { InstaCloneContext } from "../../context/InstaCloneContext";
 
 const SignIn = () => {
-	const { updateJWT } = useContext(InstaCloneContext);
+	const { updateUserData } = useContext(InstaCloneContext);
 
 	const navigate = useNavigate();
 
@@ -54,12 +54,16 @@ const SignIn = () => {
 
 			if (response.ok) {
 				const data = await response.json();
-				const { message, token } = data;
+				const { message, userData, token } = data;
 
-				localStorage.setItem("jwt", token);
+				console.log(userData, token);
 
-				updateJWT(token);
+				localStorage.setItem(
+					"userData",
+					JSON.stringify({ ...userData, token })
+				);
 
+				updateUserData({ ...userData, token });
 				notifySuccess(message);
 				_redirectTo("/home");
 				return;
@@ -74,7 +78,7 @@ const SignIn = () => {
 
 	return (
 		<div className={styles.signin}>
-			<form onSubmit={_handlePostSignIn}>
+			<form onSubmit={(e) => _handlePostSignIn(e)}>
 				<div className={styles.signInForm}>
 					<img
 						src={SignInLogo}

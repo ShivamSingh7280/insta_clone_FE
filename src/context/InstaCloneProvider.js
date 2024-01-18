@@ -3,7 +3,10 @@ import { InstaCloneContext } from "./InstaCloneContext";
 import { instaCloneReducer } from "./InstaCloneReducer";
 
 const initialState = {
-	jwt: localStorage.getItem("jwt") || null,
+	userData:
+		localStorage.getItem("userData") === "null"
+			? null
+			: JSON.parse(localStorage.getItem("userData")) || null,
 };
 
 const InstaCloneProvider = ({ children }) => {
@@ -11,23 +14,23 @@ const InstaCloneProvider = ({ children }) => {
 
 	useEffect(() => {
 		// Store JWT token in localStorage when it changes
-		localStorage.setItem("jwt", state.jwt);
-	}, [state.jwt]);
+		localStorage.setItem("userData", JSON.stringify(state.userData));
+	}, [state.userData]);
 
-	const updateJWT = (newJWT) => {
-		dispatch({ type: "UPDATE_JWT", payload: newJWT });
+	const updateUserData = (userData) => {
+		dispatch({ type: "UPDATE_USERDATA", payload: userData });
 	};
 
-	const removeJWT = () => {
-		dispatch({ type: "REMOVE_JWT" });
+	const clearUserData = () => {
+		dispatch({ type: "CLEAR_USERDATA" });
 	};
 
 	return (
 		<InstaCloneContext.Provider
 			value={{
-				jwt: state?.jwt,
-				updateJWT,
-				removeJWT,
+				userData: state?.userData,
+				updateUserData,
+				clearUserData,
 			}}>
 			{children}
 		</InstaCloneContext.Provider>

@@ -1,29 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styles from "./Profile.module.css";
 import { API } from "../../config/Api";
+import { InstaCloneContext } from "../../context/InstaCloneContext";
 
 const Profile = () => {
+	const { userData } = useContext(InstaCloneContext);
+
 	const [myAllPosts, setMyAllPosts] = useState([]);
-	const [name, setName] = useState("Instagram User");
 
 	const _fetchMyAllPosts = async () => {
 		try {
-			const token = localStorage.getItem("jwt");
-
 			const response = await fetch(`${API}/user/myposts`, {
 				headers: {
-					Authorization: "Bearer " + token,
+					Authorization: "Bearer " + userData?.token,
 				},
 			});
 
 			const posts = await response.json();
 
-			if (response.ok) {
-				setMyAllPosts(posts);
-				setName(posts?.[0]?.postedBy?.fullName);
-			} else {
-				setMyAllPosts([]);
-			}
+			setMyAllPosts(posts?.length ? posts : []);
 		} catch (error) {
 			console.log(`Error found in _fetchMyAllPosts ${error}`);
 		}
@@ -31,6 +26,7 @@ const Profile = () => {
 
 	useEffect(() => {
 		_fetchMyAllPosts();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	return (
@@ -43,12 +39,12 @@ const Profile = () => {
 					/>
 				</div>
 				<div className={styles.profileData}>
-					<h1>{name}</h1>
+					<h1>{userData?.fullName}</h1>
 
 					<span className={styles.profileInfo}>
-						<span>81 Posts</span>
-						<span>260 Followers</span>
-						<span>40 Following</span>
+						<span>{myAllPosts?.length} Posts</span>
+						<span>0 Followers</span>
+						<span>0 Following</span>
 					</span>
 				</div>
 			</div>

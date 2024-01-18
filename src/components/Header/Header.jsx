@@ -6,7 +6,7 @@ import { useContext } from "react";
 import { InstaCloneContext } from "../../context/InstaCloneContext";
 
 function Header() {
-	const { jwt: token, removeJWT } = useContext(InstaCloneContext);
+	const { userData, clearUserData } = useContext(InstaCloneContext);
 
 	const navigate = useNavigate();
 
@@ -15,8 +15,8 @@ function Header() {
 	};
 
 	const _handleSignOut = () => {
-		localStorage.removeItem("jwt");
-		removeJWT();
+		localStorage.removeItem("userData");
+		clearUserData();
 		notifySuccess("Signed OUT Successfully");
 		navigate("/");
 	};
@@ -27,11 +27,13 @@ function Header() {
 				src={logo}
 				alt="instagram-logo"
 				className={styles.logo}
-				onClick={() => (token ? _redirectTo("/home") : _redirectTo("/"))}
+				onClick={() =>
+					userData?.token ? _redirectTo("/home") : _redirectTo("/")
+				}
 			/>
 
 			<ul className={styles.menu}>
-				{token ? (
+				{userData?.token ? (
 					<>
 						<li onClick={() => _redirectTo("/home")}>HOME</li>
 						<li onClick={() => _redirectTo("/profile")}>PROFILE</li>

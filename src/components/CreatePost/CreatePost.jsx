@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styles from "./CreatePost.module.css";
 import AltImage from "../../assets/altImage.svg";
 import { notifyError, notifySuccess, notifyWarn } from "../../config";
 import { API } from "../../config/Api";
 import { useNavigate } from "react-router-dom";
+import { InstaCloneContext } from "../../context/InstaCloneContext";
 
 const CreatePost = () => {
+	const { userData } = useContext(InstaCloneContext);
+
 	const [selectedImages, setSelectedImages] = useState([]);
 	const [caption, setCaption] = useState("");
 
@@ -55,13 +58,11 @@ const CreatePost = () => {
 		const cloudinaryURL = await _postImageToCloudinary();
 
 		try {
-			let token = localStorage.getItem("jwt");
-
 			const response = await fetch(`${API}/user/post`, {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
-					Authorization: "Bearer " + token,
+					Authorization: "Bearer " + userData?.token,
 				},
 				body: JSON.stringify({
 					caption: caption,

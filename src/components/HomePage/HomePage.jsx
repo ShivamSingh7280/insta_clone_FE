@@ -1,17 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Card from "../Card/Card";
 import { API } from "../../config/Api";
+import { InstaCloneContext } from "../../context/InstaCloneContext";
 
 const HomePage = () => {
+	const { userData } = useContext(InstaCloneContext);
+
 	const [allPosts, setAllPosts] = useState([]);
 
 	const _fetchAllPosts = async () => {
 		try {
-			const token = localStorage.getItem("jwt");
-
 			const response = await fetch(`${API}/user/allpost`, {
 				headers: {
-					Authorization: "Bearer " + token,
+					Authorization: "Bearer " + userData?.token,
 				},
 			});
 
@@ -24,13 +25,12 @@ const HomePage = () => {
 
 	const _handleLike = async (id) => {
 		try {
-			const token = localStorage.getItem("jwt");
-
+			console.log("id", id);
 			const response = await fetch(`${API}/user/like`, {
 				method: "PUT",
 				headers: {
 					"Content-Type": "application/json",
-					Authorization: "Bearer " + token,
+					Authorization: "Bearer " + userData?.token,
 				},
 				body: JSON.stringify({
 					postId: id,
@@ -38,10 +38,10 @@ const HomePage = () => {
 			});
 
 			const result = await response.json();
-
+			console.log("resutlttt", result);
 			if (response.ok) {
 				const newData = allPosts.map((posts) => {
-					if (posts._id === result._id) {
+					if (posts?._id === result?._id) {
 						return result;
 					} else {
 						return posts;
@@ -51,23 +51,19 @@ const HomePage = () => {
 				setAllPosts(newData);
 			} else {
 				console.error("Error liking post:", result.error);
-				// Handle error as needed
 			}
 		} catch (error) {
 			console.error("Error in _handleLike:", error);
-			// Handle error as needed
 		}
 	};
 
 	const _handleUnlike = async (id) => {
 		try {
-			const token = localStorage.getItem("jwt");
-
 			const response = await fetch(`${API}/user/unlike`, {
 				method: "PUT",
 				headers: {
 					"Content-Type": "application/json",
-					Authorization: "Bearer " + token,
+					Authorization: "Bearer " + userData?.token,
 				},
 				body: JSON.stringify({
 					postId: id,
@@ -88,34 +84,26 @@ const HomePage = () => {
 				setAllPosts(newData);
 			} else {
 				console.error("Error unliking post:", result.error);
-				// Handle error as needed
 			}
 		} catch (error) {
 			console.error("Error in _handleUnlike:", error);
-			// Handle error as needed
 		}
 	};
 
 	useEffect(() => {
 		_fetchAllPosts();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	return (
 		<div>
-			{allPosts.map((post, index) => (
+			{allPosts.map((post) => (
 				<Card
-					key={index}
-					caption={post?.caption}
-					image={post?.images}
-					name={post?.postedBy?.fullName}
-					id={post?._id}
-					handleLike={() => {
-						_handleLike(post?._id);
-					}}
-					handleUnlike={() => {
-						_handleUnlike(post?._id);
-					}}
-					like={post?.likes}
+					key={post?._id}
+					post={post}
+					userData={userData}
+					handleLike={_handleLike}
+					handleUnlike={_handleUnlike}
 				/>
 			))}
 		</div>

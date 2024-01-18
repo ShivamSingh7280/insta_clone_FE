@@ -1,14 +1,20 @@
 export const instaCloneReducer = (state, action) => {
-	switch (action.type) {
-		case "UPDATE_JWT":
-			return {
-				jwt: action.payload,
-			};
+	console.log(state, action);
 
-		case "REMOVE_JWT":
+	switch (action.type) {
+		case "UPDATE_USERDATA": {
 			return {
-				jwt: null,
+				...state,
+				userData: { ...action.payload },
 			};
+		}
+
+		case "CLEAR_USERDATA": {
+			return {
+				...state,
+				userData: {},
+			};
+		}
 
 		default:
 			break;
