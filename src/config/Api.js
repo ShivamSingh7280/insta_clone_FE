@@ -1,1 +1,1 @@
-export const API = "http://localhost:8082";
+export const API = "https://insta-clone-backend-qj99.onrender.com";
