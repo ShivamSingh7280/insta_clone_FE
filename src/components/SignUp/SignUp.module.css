@@ -1,0 +1,83 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;1,200&display=swap");
+
+.signup {
+	background-image: url(../../assets/background.png);
+	background-size: cover;
+	height: 100vh;
+	width: 100vw;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	font-family: "Poppins", sans-serif;
+}
+
+.signupLogo {
+	width: 200px;
+	object-fit: contain;
+	color: white;
+	padding: 10px 0px;
+}
+
+.signupPara {
+	color: rgba(var(--f52, 142, 180, 180), 1);
+	font-size: 17px;
+	font-weight: 500;
+	line-height: 20px;
+	margin: 0px 40px 20px;
+}
+
+.form > div {
+	width: 90%;
+	margin: auto;
+}
+
+input {
+	padding: 5px;
+	margin: 3px 0px;
+	outline: none;
+	font-size: 16px;
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.para {
+	font-size: 13px;
+	margin: 3px 0px;
+}
+
+.submitBtn {
+	background-color: #1773ea;
+	border: none;
+	color: white;
+	border-radius: 4px;
+	font-weight: 400;
+	padding: 7px 10px;
+	width: 90%;
+	font-size: medium;
+	cursor: pointer;
+	margin-top: 8px;
+}
+
+.form {
+	background-color: #fff;
+	padding: 30px;
+	border: 1px solid #fff;
+	border-radius: 4px;
+}
+
+.link {
+	color: #007aff;
+	cursor: pointer;
+}
+
+.form2 {
+	background-color: #fff;
+	padding: 15px 30px 15px 30px;
+	margin-top: 5px;
+	border: 1px solid #fff;
+	border-radius: 4px;
+	font-size: medium;
+	font-weight: 300;
+	font-family: "Poppins", sans-serif;
+}

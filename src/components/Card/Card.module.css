@@ -1,0 +1,107 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;1,200&display=swap");
+
+.card {
+	max-width: 500px;
+	height: max-content;
+	margin: 5px auto;
+	border-top: none;
+	border: 1px solid rgb(173, 173, 173);
+	border-radius: 5px;
+	font-family: "Poppins", sans-serif;
+}
+
+.cardHeader {
+	display: flex;
+	align-items: center;
+	gap: 13px;
+}
+
+.card Header > h5 {
+	margin: 0;
+}
+
+.cardProfileImage {
+	margin: 5px;
+}
+
+.cardProfileImage img {
+	border-radius: 50%;
+	object-fit: cover;
+	padding: 5px;
+}
+
+.cardImage {
+	margin-bottom: 18px;
+}
+
+.cardImage img {
+	width: 100%;
+	object-fit: cover;
+}
+
+.cardContent {
+	text-align: left;
+	line-height: 4px;
+	padding: 3px 10px;
+	border-bottom: 1px solid rgb(173, 173, 173);
+}
+
+.reactionContent {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	gap: 25px;
+}
+
+.likeContent p {
+	font-weight: 300;
+}
+
+.caption {
+	margin-top: 5px;
+	font-size: medium;
+	font-weight: 300;
+}
+
+.addComment {
+	display: flex;
+	align-items: center;
+	margin: auto auto;
+	margin-top: 2px;
+}
+
+.addComment input {
+	margin: 0;
+	outline: none;
+	border: none;
+	padding: 10px;
+}
+
+.comment {
+	border: none;
+	background: none;
+	font-weight: bolder;
+	cursor: pointer;
+	color: #339ced;
+}
+
+.dislike img {
+	cursor: pointer;
+}
+
+.like img {
+	cursor: pointer;
+}
+
+.liked img {
+	object-fit: contain;
+	margin-top: 0;
+	padding-top: 0;
+	height: 28px;
+	width: 28px;
+	cursor: pointer;
+}
+
+.addComment img {
+	cursor: pointer;
+}

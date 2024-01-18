@@ -1,0 +1,77 @@
+.createPost {
+	max-width: 500px;
+	margin: 10px auto;
+	border: 1px solid rgb(173, 173, 173);
+	border-radius: 5px;
+	font-family: "Poppins", "sans-serif";
+}
+
+.mainContent {
+	border-top: 1px solid rgb(173, 173, 173);
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.postHeader {
+	display: flex;
+	align-items: center;
+	margin: 5px;
+}
+
+.postHeader button {
+	border: none;
+	color: #339ce3;
+	background-color: #fff;
+	font-weight: bolder;
+	cursor: pointer;
+	font-size: medium;
+}
+
+.cardImage {
+	display: flex;
+	align-items: center;
+	margin: 10px;
+	gap: 20px;
+}
+.cardImage img {
+	border-radius: 50%;
+	object-fit: cover;
+}
+
+.cardPic img {
+	width: 100%;
+}
+
+.cardPic .altText {
+	text-align: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 100px;
+}
+
+.clearBtn {
+	border: none;
+	color: #339ce3;
+	background-color: #fff;
+	font-weight: bolder;
+	cursor: pointer;
+	font-size: medium;
+	margin-right: 10px;
+}
+
+.postHeader h4 {
+	margin: 3px auto;
+	font-size: medium;
+}
+
+.details {
+	border-top: 1px solid rgb(173, 173, 173);
+}
+
+textarea {
+	width: 95%;
+	border: none;
+	outline: none;
+}
